@@ -1,0 +1,2193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Dimuthu Fernando | Quantity Surveyor · Programmer · GIS & Data Analyst</title>
+  <meta name="description" content="Dimuthu Fernando — Quantity Surveyor, Programmer, GIS and Data Analysis specialist.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── RESET ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── HIDE SCROLLBAR ── */
+    html { scrollbar-width: none; scroll-behavior: smooth; }
+    html::-webkit-scrollbar { display: none; }
+    body::-webkit-scrollbar { display: none; }
+
+    :root {
+      --white: #ffffff;
+      --off-white: #f7f6f3;
+      --light: #efefec;
+      --mid: #d4d3ce;
+      --dark-mid: #888882;
+      --text-muted: #6b6b65;
+      --text-body: #2c2c28;
+      --text-heading: #111110;
+      --accent: #1a5c9e;
+      --accent-light: #e8f0f9;
+      --accent-mid: #2d7dd2;
+      --tag-bg: #eef3f8;
+      --tag-text: #1a4a7a;
+      --nav-h: 72px;
+      --serif: 'DM Sans', sans-serif;
+      --mono: 'DM Mono', monospace;
+    }
+
+    body {
+      font-family: var(--serif);
+      color: var(--text-body);
+      background: var(--white);
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+
+    /* ── SCROLL REVEAL BASE ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.revealed { opacity: 1; transform: translateY(0); }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-36px);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-left.revealed { opacity: 1; transform: translateX(0); }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(36px);
+      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-right.revealed { opacity: 1; transform: translateX(0); }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.93);
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-scale.revealed { opacity: 1; transform: scale(1); }
+
+    .delay-1 { transition-delay: 0.12s; }
+    .delay-2 { transition-delay: 0.24s; }
+    .delay-3 { transition-delay: 0.36s; }
+    .delay-4 { transition-delay: 0.48s; }
+    .delay-5 { transition-delay: 0.60s; }
+
+    /* ── NAV ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      height: var(--nav-h);
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--mid);
+      display: flex; align-items: center;
+      padding: 0 5%;
+      justify-content: space-between;
+      transition: box-shadow 0.3s;
+    }
+    .navbar.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.06); }
+
+    .brand {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; color: var(--text-heading);
+    }
+    .brand-name {
+      font-size: 15px; font-weight: 500; letter-spacing: -0.2px;
+    }
+
+    /* Nav links + CTA aligned in one flex row */
+    .nav-links {
+      display: flex; align-items: center; gap: 28px;
+      list-style: none;
+    }
+    .nav-links li {
+      display: flex; align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.1px;
+      transition: color 0.2s;
+      position: relative;
+      padding-bottom: 2px;
+      line-height: 1;
+    }
+    .nav-links a:not(.nav-cta):not(.nav-cv)::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0;
+      width: 0; height: 1px;
+      background: var(--text-heading);
+      transition: width 0.25s cubic-bezier(0.22,1,0.36,1);
+    }
+    .nav-links a:not(.nav-cta):not(.nav-cv):hover::after { width: 100%; }
+    .nav-links a:not(.nav-cta):not(.nav-cv):hover { color: var(--text-heading); }
+
+    /* Contact CTA button */
+    .nav-cta {
+      display: inline-flex !important; align-items: center !important;
+      background: var(--text-heading) !important;
+      color: var(--white) !important;
+      padding: 8px 18px !important;
+      border-radius: 4px !important;
+      font-size: 13px !important;
+      line-height: 1 !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: #333 !important; }
+
+    /* CV Download button */
+    .nav-cv {
+      display: inline-flex !important; align-items: center !important; gap: 6px !important;
+      background: transparent !important;
+      color: var(--text-heading) !important;
+      border: 1px solid var(--mid) !important;
+      padding: 7px 14px !important;
+      border-radius: 4px !important;
+      font-size: 13px !important;
+      line-height: 1 !important;
+      text-decoration: none !important;
+      transition: border-color 0.2s, background 0.2s !important;
+      white-space: nowrap !important;
+    }
+    .nav-cv:hover { border-color: var(--text-heading) !important; background: var(--off-white) !important; }
+    .nav-cv svg { flex-shrink: 0; }
+
+    /* Mobile toggle */
+    .nav-menu-toggle {
+      display: none;
+      flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+      z-index: 1100;
+    }
+    .nav-menu-toggle span {
+      display: block; width: 24px; height: 1.5px;
+      background: var(--text-heading);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .nav-menu-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-menu-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-menu-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Full-screen mobile nav */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--white);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.22,1,0.36,1);
+      -webkit-overflow-scrolling: touch;
+    }
+    .mobile-nav.open { opacity: 1; pointer-events: all; }
+    .mobile-nav.is-visible { display: flex; }
+    .mobile-nav ul { list-style: none; text-align: center; }
+    .mobile-nav ul li { overflow: hidden; }
+    .mobile-nav ul li a {
+      display: block;
+      padding: 18px 40px;
+      font-size: clamp(28px, 7vw, 48px);
+      font-weight: 300;
+      letter-spacing: -1.5px;
+      color: var(--text-heading);
+      text-decoration: none;
+      transform: translateY(40px);
+      opacity: 0;
+      transition: color 0.2s, transform 0.4s cubic-bezier(0.22,1,0.36,1), opacity 0.4s;
+    }
+    .mobile-nav.open ul li a { transform: translateY(0); opacity: 1; }
+    .mobile-nav.open ul li:nth-child(1) a { transition-delay: 0.05s; }
+    .mobile-nav.open ul li:nth-child(2) a { transition-delay: 0.10s; }
+    .mobile-nav.open ul li:nth-child(3) a { transition-delay: 0.15s; }
+    .mobile-nav.open ul li:nth-child(4) a { transition-delay: 0.20s; }
+    .mobile-nav.open ul li:nth-child(5) a { transition-delay: 0.25s; }
+    .mobile-nav ul li a:hover { color: var(--accent-mid); }
+    .mobile-nav-footer {
+      margin-top: 48px;
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--dark-mid);
+      transform: translateY(20px);
+      opacity: 0;
+      transition: opacity 0.4s 0.3s, transform 0.4s 0.3s;
+    }
+    .mobile-nav.open .mobile-nav-footer { transform: translateY(0); opacity: 1; }
+
+    /* CV download button inside mobile nav */
+    .mobile-nav-cv {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 28px;
+      padding: 11px 28px;
+      background: transparent;
+      color: var(--text-heading);
+      border: 1px solid var(--mid);
+      border-radius: 4px;
+      font-family: var(--serif); font-size: 15px; font-weight: 400;
+      text-decoration: none; letter-spacing: 0.2px;
+      opacity: 0; transform: translateY(16px);
+      transition: opacity 0.4s 0.32s, transform 0.4s 0.32s, border-color 0.2s, background 0.2s;
+    }
+    .mobile-nav.open .mobile-nav-cv { opacity: 1; transform: translateY(0); }
+    .mobile-nav-cv:hover { border-color: var(--text-heading); background: var(--off-white); }
+
+    /* ── HERO ── */
+    .hero {
+      padding-top: calc(var(--nav-h) + 80px);
+      padding-bottom: 150px;
+      padding-left: 5%;
+      padding-right: 5%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent-mid); margin-bottom: 18px;
+    }
+    .hero-title {
+      font-size: clamp(38px, 5vw, 64px); font-weight: 300;
+      line-height: 1.1; letter-spacing: -2px;
+      color: var(--text-heading); margin-bottom: 24px;
+    }
+    .hero-title strong { font-weight: 500; }
+    .hero-desc {
+      font-size: 16px; color: var(--text-muted);
+      max-width: 440px; line-height: 1.75; margin-bottom: 36px;
+    }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+    .tag {
+      font-family: var(--mono); font-size: 11px;
+      padding: 5px 12px; background: var(--tag-bg);
+      color: var(--tag-text); border-radius: 2px; letter-spacing: 0.5px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--text-heading); color: var(--white);
+      padding: 13px 26px; border-radius: 4px; text-decoration: none;
+      font-size: 14px; font-weight: 500;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-primary:hover { background: #2a2a26; transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--text-heading);
+      border: 1px solid var(--mid); padding: 13px 26px;
+      border-radius: 4px; text-decoration: none; font-size: 14px;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--text-heading); background: var(--off-white); transform: translateY(-1px); }
+    .btn-arrow { font-size: 16px; line-height: 1; }
+
+    /* ── HERO VISUAL — Professional Cards ── */
+    .hero-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 12px;
+      will-change: transform;
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+    }
+
+    .hero-card {
+      background: var(--off-white);
+      border: 0.5px solid var(--mid);
+      border-radius: 10px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      /* GPU layer for smooth compositing */
+      transform: translateZ(0);
+      -webkit-transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      will-change: transform;
+      transition: box-shadow 0.45s cubic-bezier(0.22,1,0.36,1);
+    }
+    .hero-card:hover {
+      box-shadow: 0 12px 40px rgba(26,92,158,0.1), 0 2px 8px rgba(0,0,0,0.06);
+    }
+    /* First card spans full width */
+    .hero-card:first-child { grid-column: span 2; }
+
+    /* Subtle shimmer on top edge */
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent-mid), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .hero-card:hover::before { opacity: 1; }
+
+    .hero-card-label {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--dark-mid); margin-bottom: 10px;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .hero-card-label::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent-mid); flex-shrink: 0;
+    }
+    .hero-card-stat {
+      font-size: 38px; font-weight: 300;
+      color: var(--text-heading); letter-spacing: -2px; line-height: 1;
+    }
+    .hero-card-stat span {
+      font-size: 18px; color: var(--accent-mid); font-weight: 400;
+    }
+    .hero-card-sub {
+      font-size: 11px; color: var(--text-muted); margin-top: 3px;
+      font-family: var(--mono); letter-spacing: 0.3px;
+    }
+    /* Floating animation — runs AFTER entrance via JS class, GPU-only transform */
+    @keyframes float0 {
+      0%,100% { transform: translateY(0px) translateZ(0); }
+      50%      { transform: translateY(-5px) translateZ(0); }
+    }
+    @keyframes float1 {
+      0%,100% { transform: translateY(-3px) translateZ(0); }
+      50%      { transform: translateY(3px) translateZ(0); }
+    }
+    @keyframes float2 {
+      0%,100% { transform: translateY(0px) translateZ(0); }
+      50%      { transform: translateY(-4px) translateZ(0); }
+    }
+    .hero-card.float-active:nth-child(1) { animation: float0 6s ease-in-out infinite; }
+    .hero-card.float-active:nth-child(2) { animation: float1 7s ease-in-out infinite 0.5s; }
+    .hero-card.float-active:nth-child(3) { animation: float2 6.5s ease-in-out infinite 1s; }
+    .hero-card.float-active:hover { animation-play-state: paused; }
+
+    /* ── SECTION BASE ── */
+    section { padding: 100px 5%; }
+    .section-inner { max-width: 1280px; margin: 0 auto; }
+    .section-eyebrow {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent-mid); margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(28px, 3.5vw, 44px); font-weight: 300;
+      letter-spacing: -1.5px; color: var(--text-heading);
+      line-height: 1.15; margin-bottom: 16px;
+    }
+    .section-title strong { font-weight: 500; }
+    .section-lead {
+      font-size: 16px; color: var(--text-muted);
+      max-width: 560px; line-height: 1.75; margin-bottom: 60px;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--off-white); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+    }
+    .project-card {
+      background: var(--white);
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      border: 0.5px solid var(--mid);
+      transition: background 0.3s, transform 0.4s cubic-bezier(0.22,1,0.36,1),
+                  box-shadow 0.4s cubic-bezier(0.22,1,0.36,1);
+      /* Start hidden for scroll animation */
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    /* When revealed */
+    .project-card.card-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .project-card:hover {
+      background: var(--accent-light);
+      box-shadow: 0 8px 32px rgba(26,92,158,0.10);
+    }
+    .project-number {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--dark-mid); margin-bottom: 20px; letter-spacing: 1px;
+    }
+    .project-visual {
+      width: 100%; height: 200px;
+      background: var(--light); border-radius: 8px;
+      margin-bottom: 24px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .project-card:hover .project-visual { transform: scale(1.01); }
+    .project-title {
+      font-size: 20px; font-weight: 500;
+      color: var(--text-heading); margin-bottom: 10px; letter-spacing: -0.3px;
+    }
+    .project-desc {
+      font-size: 14px; color: var(--text-muted);
+      line-height: 1.65; margin-bottom: 18px;
+    }
+    .project-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .project-tags .tag { background: var(--light); color: var(--text-muted); }
+    .project-arrow {
+      position: absolute; top: 40px; right: 40px;
+      font-size: 18px; color: var(--mid);
+      transition: color 0.2s, transform 0.3s cubic-bezier(0.22,1,0.36,1);
+    }
+    .project-card:hover .project-arrow { color: var(--accent); transform: translate(4px,-4px); }
+
+    /* Project SVG animations — triggered on scroll reveal */
+    .proj-svg-el {
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22,1,0.36,1);
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    .project-card.card-revealed .proj-svg-el {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .project-card.card-revealed .proj-svg-el:nth-child(1) { transition-delay: 0.1s; }
+    .project-card.card-revealed .proj-svg-el:nth-child(2) { transition-delay: 0.2s; }
+    .project-card.card-revealed .proj-svg-el:nth-child(3) { transition-delay: 0.3s; }
+    .project-card.card-revealed .proj-svg-el:nth-child(4) { transition-delay: 0.4s; }
+    .project-card.card-revealed .proj-svg-el:nth-child(5) { transition-delay: 0.5s; }
+
+    /* Path draw animation on reveal */
+    .proj-path-draw {
+      stroke-dasharray: 600;
+      stroke-dashoffset: 600;
+      transition: stroke-dashoffset 1.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .project-card.card-revealed .proj-path-draw {
+      stroke-dashoffset: 0;
+    }
+    .project-card.card-revealed .proj-path-draw:nth-child(2) { transition-delay: 0.3s; }
+    .project-card.card-revealed .proj-path-draw:nth-child(3) { transition-delay: 0.5s; }
+
+    /* Bar rise on reveal */
+    .proj-bar-rise {
+      transform-origin: bottom;
+      transform: scaleY(0);
+      transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .project-card.card-revealed .proj-bar-rise { transform: scaleY(1); }
+    .project-card.card-revealed .proj-bar-rise:nth-child(1) { transition-delay: 0.1s; }
+    .project-card.card-revealed .proj-bar-rise:nth-child(2) { transition-delay: 0.18s; }
+    .project-card.card-revealed .proj-bar-rise:nth-child(3) { transition-delay: 0.26s; }
+    .project-card.card-revealed .proj-bar-rise:nth-child(4) { transition-delay: 0.34s; }
+
+    /* Row slide in on reveal */
+    .proj-row-reveal {
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22,1,0.36,1);
+    }
+    .project-card.card-revealed .proj-row-reveal { opacity: 1; transform: translateX(0); }
+    .project-card.card-revealed .proj-row-reveal:nth-child(1) { transition-delay: 0.15s; }
+    .project-card.card-revealed .proj-row-reveal:nth-child(2) { transition-delay: 0.25s; }
+    .project-card.card-revealed .proj-row-reveal:nth-child(3) { transition-delay: 0.35s; }
+    .project-card.card-revealed .proj-row-reveal:nth-child(4) { transition-delay: 0.45s; }
+
+    /* ── STICKY SCROLL STACK ── */
+    /*
+      How it works:
+      1. #services sits NORMALLY (not sticky) — scrolls into view naturally
+      2. .quote-section is sticky at top:0, z-index 6 — slides OVER services
+         once services has fully passed through the viewport
+      3. #process is sticky at top:0, z-index 15 — slides OVER quote
+      The .sticky-stack wrapper bounds all three so everything unsticks
+      cleanly when the stack bottom clears the viewport.
+    */
+    .sticky-stack {
+      position: relative;
+    }
+
+    /* ── SERVICES — normal flow, NOT sticky ── */
+    #services {
+      background: var(--white);
+      position: relative;
+      z-index: 5;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 0.5px solid var(--mid);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .service-item {
+      padding: 40px 36px;
+      border-right: 0.5px solid var(--mid);
+      position: relative;
+      transition: background 0.3s;
+    }
+    .service-item:last-child { border-right: none; }
+    .service-item:hover { background: var(--off-white); }
+    .service-item::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--accent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .service-item:hover::before { transform: scaleX(1); }
+    .service-num {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--dark-mid); letter-spacing: 1px; margin-bottom: 24px;
+    }
+    .service-icon {
+      width: 48px; height: 48px;
+      background: var(--accent-light); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px;
+    }
+    .service-title {
+      font-size: 19px; font-weight: 500;
+      color: var(--text-heading); margin-bottom: 14px; letter-spacing: -0.3px;
+    }
+    .service-desc {
+      font-size: 14px; color: var(--text-muted);
+      line-height: 1.75; margin-bottom: 24px;
+    }
+    .service-deliverables { display: flex; flex-direction: column; gap: 8px; }
+    .service-deliverable {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 13px; color: var(--text-body);
+    }
+    .service-deliverable::before {
+      content: ''; width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent-mid); flex-shrink: 0;
+    }
+    .service-footer {
+      margin-top: 32px; padding-top: 20px;
+      border-top: 0.5px solid var(--mid);
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent);
+    }
+
+    /* ── QUOTE — sticky, slides over services ── */
+    .quote-section {
+      background: var(--accent-light);
+      padding: 80px 5%;
+      text-align: center;
+      position: sticky;
+      top: var(--nav-h);
+      z-index: 6;
+    }
+    .quote-text {
+      font-size: clamp(20px, 3vw, 32px); font-weight: 300;
+      color: var(--text-heading); letter-spacing: -0.8px;
+      line-height: 1.45; max-width: 760px; margin: 0 auto 20px;
+    }
+    .quote-attr {
+      font-family: var(--mono); font-size: 12px;
+      color: var(--accent); letter-spacing: 1px;
+    }
+
+    /* ── PROCESS — sticky, slides on top of services + quote ── */
+    .process-sticky-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 15;
+    }
+    #process {
+      background: var(--text-heading);
+      color: var(--white);
+      position: relative;
+      z-index: 15;
+    }
+    #process .section-eyebrow { color: var(--dark-mid); }
+    #process .section-title { color: var(--white); }
+    #process .section-lead { color: rgba(255,255,255,0.5); }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      border-top: 0.5px solid rgba(255,255,255,0.12);
+    }
+    .process-step {
+      padding: 36px 28px 36px 10px;
+      border-right: 0.5px solid rgba(255,255,255,0.12);
+      position: relative;
+    }
+    .process-step:last-child { border-right: none; }
+    .process-step-num {
+      font-family: var(--mono); font-size: 11px;
+      color: rgba(255,255,255,0.3); letter-spacing: 1px; margin-bottom: 14px;
+    }
+    .process-step-title { font-size: 15px; font-weight: 500; color: var(--white); margin-bottom: 10px; }
+    .process-step-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.65; }
+
+    /* sections after process on top */
+    #skills, #contact, footer {
+      position: relative;
+      z-index: 20;
+      background: var(--white);
+    }
+    #contact { background: var(--off-white); }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--white); }
+    .skills-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: start;
+    }
+    .skills-col { display: flex; flex-direction: column; gap: 40px; }
+    .skills-group-label {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--dark-mid); border-bottom: 0.5px solid var(--mid);
+      padding-bottom: 12px; margin-bottom: 20px;
+    }
+    .skill-row {
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: center; gap: 16px; padding: 11px 0;
+      border-bottom: 0.5px solid var(--light);
+    }
+    .skill-row:last-child { border-bottom: none; }
+    .skill-info { display: flex; flex-direction: column; gap: 6px; }
+    .skill-name { font-size: 14px; color: var(--text-body); }
+    .skill-bar-wrap {
+      width: 120px; height: 3px;
+      background: var(--light); border-radius: 2px; overflow: hidden; flex-shrink: 0;
+    }
+    .skill-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--accent-mid) 100%);
+      border-radius: 2px; width: 0;
+      transition: width 1s cubic-bezier(0.22,1,0.36,1);
+    }
+    .skill-pct {
+      font-family: var(--mono); font-size: 10px;
+      color: var(--dark-mid); letter-spacing: 0.5px; white-space: nowrap;
+    }
+
+    /* ── CONTACT ── */
+    .contact-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-label {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 1.5px; text-transform: uppercase; color: var(--dark-mid);
+    }
+    .form-input, .form-textarea {
+      font-family: var(--serif); font-size: 14px;
+      color: var(--text-body); background: var(--white);
+      border: 0.5px solid var(--mid); border-radius: 4px;
+      padding: 12px 14px; outline: none;
+      transition: border-color 0.2s; resize: none; width: 100%;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
+    .form-textarea { min-height: 120px; }
+    .contact-info { padding-top: 8px; }
+    .contact-info-item {
+      display: flex; gap: 16px; align-items: flex-start;
+      padding: 20px 0; border-bottom: 0.5px solid var(--mid);
+    }
+    .contact-info-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: var(--accent-light); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-info-label {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--dark-mid); margin-bottom: 4px;
+    }
+    .contact-info-value { font-size: 14px; color: var(--text-body); }
+
+    /* ── FOOTER — reduced height ── */
+    footer {
+      background: var(--text-heading);
+      color: rgba(255,255,255,0.4);
+      padding: 0; position: relative; z-index: 20;
+    }
+    .footer-top {
+      padding: 44px 5% 36px;
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 36px;
+      border-bottom: 0.5px solid rgba(255,255,255,0.08);
+    }
+    .footer-brand {
+      display: flex; align-items: center; gap: 10px;
+      color: rgba(255,255,255,0.85); font-size: 16px; font-weight: 500;
+      letter-spacing: -0.3px; margin-bottom: 14px;
+    }
+    .footer-brand-dot {
+      width: 8px; height: 8px; background: var(--accent-mid); border-radius: 50%;
+    }
+    .footer-tagline {
+      font-size: 13px; color: rgba(255,255,255,0.35);
+      line-height: 1.75; max-width: 260px; margin-bottom: 20px;
+    }
+    .footer-social { display: flex; gap: 12px; }
+    .footer-social-link {
+      width: 34px; height: 34px; border-radius: 6px;
+      border: 0.5px solid rgba(255,255,255,0.12);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, border-color 0.2s; text-decoration: none;
+    }
+    .footer-social-link:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.25); }
+    .footer-col-title {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin-bottom: 16px;
+    }
+    .footer-col-links {
+      list-style: none; display: flex; flex-direction: column; gap: 10px;
+    }
+    .footer-col-links a {
+      text-decoration: none; color: rgba(255,255,255,0.5); font-size: 13px;
+      transition: color 0.2s; position: relative; display: inline-block;
+    }
+    .footer-col-links a::after {
+      content: ''; position: absolute; bottom: -1px; left: 0;
+      width: 0; height: 1px; background: rgba(255,255,255,0.5);
+      transition: width 0.25s cubic-bezier(0.22,1,0.36,1);
+    }
+    .footer-col-links a:hover::after { width: 100%; }
+    .footer-col-links a:hover { color: rgba(255,255,255,0.8); }
+    .footer-col-text { font-size: 12px; color: rgba(255,255,255,0.35); line-height: 1.75; }
+    .footer-status {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(255,255,255,0.05); border: 0.5px solid rgba(255,255,255,0.1);
+      border-radius: 20px; padding: 5px 12px;
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 1px; color: rgba(255,255,255,0.5); margin-top: 14px;
+    }
+    .footer-status-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #4caf50; animation: statusPulse 2s infinite;
+    }
+    @keyframes statusPulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+    .footer-bottom {
+      padding: 16px 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 10px;
+    }
+    .footer-copy { font-size: 11px; font-family: var(--mono); color: rgba(255,255,255,0.25); }
+    .footer-legal { display: flex; gap: 20px; list-style: none; }
+    .footer-legal a {
+      font-size: 11px; font-family: var(--mono);
+      color: rgba(255,255,255,0.2); text-decoration: none; transition: color 0.2s;
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.5); }
+
+    /* ── SCROLL PROGRESS ── */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-mid));
+      width: 0%; z-index: 9999; transition: width 0.1s;
+    }
+
+    /* ── HERO ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow, .hero-title, .hero-desc, .hero-tags, .hero-actions {
+      animation: fadeUp 0.7s ease both;
+    }
+    .hero-eyebrow  { animation-delay: 0.05s; }
+    .hero-title    { animation-delay: 0.15s; }
+    .hero-desc     { animation-delay: 0.25s; }
+    .hero-tags     { animation-delay: 0.35s; }
+    .hero-actions  { animation-delay: 0.45s; }
+
+    /* Hero card entrance — controlled by JS class, no CSS-only conflict */
+    @keyframes cardEntrance {
+      from { opacity: 0; transform: translateY(28px) scale(0.97) translateZ(0); }
+      to   { opacity: 1; transform: translateY(0) scale(1) translateZ(0); }
+    }
+    /* Desktop: cards start hidden, JS adds card-entered class */
+    .hero-card {
+      opacity: 0;
+    }
+    /* On mobile, override: cards are hidden via scroll-reveal transition, not this */
+    @media (max-width: 900px) {
+      .hero-card {
+        opacity: 0;
+        /* mobile scroll reveal handled via .mobile-card-revealed */
+      }
+    }
+    .hero-card.card-entered {
+      animation: cardEntrance 0.7s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .hero-card.card-entered:nth-child(1) { animation-delay: 0.55s; }
+    .hero-card.card-entered:nth-child(2) { animation-delay: 0.70s; }
+    .hero-card.card-entered:nth-child(3) { animation-delay: 0.85s; }
+
+    /* ── SVG MAP ANIMATIONS ── */
+    @keyframes mapPulse {
+      0%,100% { r: 4; opacity: 1; }
+      50% { r: 6.5; opacity: 0.55; }
+    }
+    .map-poi { animation: mapPulse 2.5s ease-in-out infinite; }
+    .map-poi:nth-child(2) { animation-delay: 0.6s; }
+    .map-poi:nth-child(3) { animation-delay: 1.2s; }
+    .map-poi:nth-child(4) { animation-delay: 1.8s; }
+
+    /* ── SVG BAR ANIMATIONS ── */
+    @keyframes barRise {
+      from { transform: scaleY(0); }
+      to   { transform: scaleY(1); }
+    }
+    .bar-anim {
+      transform-origin: bottom;
+      animation: barRise 0.9s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    .bar-anim:nth-child(1) { animation-delay: 0.6s; }
+    .bar-anim:nth-child(2) { animation-delay: 0.68s; }
+    .bar-anim:nth-child(3) { animation-delay: 0.76s; }
+    .bar-anim:nth-child(4) { animation-delay: 0.84s; }
+    .bar-anim:nth-child(5) { animation-delay: 0.92s; }
+    .bar-anim:nth-child(6) { animation-delay: 1.00s; }
+    .bar-anim:nth-child(7) { animation-delay: 1.08s; }
+
+    /* ── SVG CODE LINE ANIMATIONS ── */
+    @keyframes typeLine {
+      from { opacity: 0; transform: translateX(-10px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .code-line { animation: typeLine 0.5s ease both; }
+    .code-line:nth-child(1) { animation-delay: 0.75s; }
+    .code-line:nth-child(2) { animation-delay: 0.95s; }
+    .code-line:nth-child(3) { animation-delay: 1.15s; }
+    .code-line:nth-child(4) { animation-delay: 1.35s; }
+    .code-line:nth-child(5) { animation-delay: 1.55s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-top: calc(var(--nav-h) + 40px); gap: 36px; }
+      /* Show hero-visual on mobile as a compact single-column strip */
+      .hero-visual {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        max-width: 480px;
+        margin: 0 auto;
+        width: 100%;
+        /* Disable parallax on mobile */
+        transform: none !important;
+        will-change: auto;
+      }
+      /* All cards in single column, first card not spanning */
+      .hero-visual .hero-card:first-child { grid-column: span 1; }
+      /* Show all cards on mobile — no hiding */
+      .hero-visual .hero-card:nth-child(2),
+      .hero-visual .hero-card:nth-child(3) { display: block; }
+
+      /* Mobile hero card scroll-reveal */
+      .hero-visual .hero-card {
+        opacity: 0;
+        transform: translateY(28px);
+        transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1),
+                    transform 0.65s cubic-bezier(0.22,1,0.36,1);
+      }
+      .hero-visual .hero-card.mobile-card-revealed {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .hero-visual .hero-card:nth-child(1) { transition-delay: 0.05s; }
+      .hero-visual .hero-card:nth-child(2) { transition-delay: 0.18s; }
+      .hero-visual .hero-card:nth-child(3) { transition-delay: 0.30s; }
+      /* Disable float animation on mobile for performance */
+      .hero-card.float-active { animation: none !important; }
+
+      .projects-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; border-radius: 6px; }
+      .service-item { border-right: none; border-bottom: 0.5px solid var(--mid); }
+      .service-item:last-child { border-bottom: none; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .skills-layout { grid-template-columns: 1fr; gap: 0; }
+      .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+      .nav-links { display: none; }
+      .nav-menu-toggle { display: flex; }
+      /* Compact footer on mobile */
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+        padding: 28px 5% 22px;
+      }
+      .footer-brand-col { grid-column: span 2; }
+      .footer-tagline { max-width: 100%; font-size: 12px; margin-bottom: 14px; }
+      .footer-status { margin-top: 10px; }
+    }
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top {
+        grid-template-columns: 1fr;
+        padding: 22px 5% 18px;
+        gap: 20px;
+      }
+      .footer-brand-col { grid-column: span 1; }
+      /* Hide footer link cols on very small screens, keep brand + copyright */
+      .footer-top > div:not(.footer-brand-col):nth-child(3),
+      .footer-top > div:not(.footer-brand-col):nth-child(4) { display: none; }
+      .footer-bottom { padding: 12px 5%; }
+      .hero-title { letter-spacing: -1.5px; }
+      section { padding: 60px 5%; }
+      .skill-bar-wrap { width: 80px; }
+      .hero { padding-bottom: 60px; }
+    }
+    @media (max-width: 900px) {
+      .mobile-nav { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Scroll progress bar -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ═══ MOBILE NAV ═══ -->
+<div class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
+    <li><a href="#services" class="mobile-nav-link">Services</a></li>
+    <li><a href="#skills"   class="mobile-nav-link">Skills</a></li>
+    <li><a href="#process"  class="mobile-nav-link">Process</a></li>
+    <li><a href="#contact"  class="mobile-nav-link">Contact</a></li>
+  </ul>
+  <!-- CV download in mobile nav -->
+  <a href="cv-dimuthu-fernando.pdf" download class="mobile-nav-cv">
+    <svg width="15" height="15" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M7 1v7M7 8l-2.5-2.5M7 8l2.5-2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M2 10v1.5a.5.5 0 00.5.5h9a.5.5 0 00.5-.5V10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+    </svg>
+    Download CV
+  </a>
+  <div class="mobile-nav-footer">QS · GIS · DATA · CODE</div>
+</div>
+
+<!-- ═══ NAVBAR ═══ -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="brand">
+    <span class="brand-name">Dimuthu Fernando</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#process">Process</a></li>
+    <!-- CV Download button -->
+    <li>
+      <a href="cv-dimuthu-fernando.pdf" download class="nav-cv">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 1v7M7 8l-2.5-2.5M7 8l2.5-2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 10v1.5a.5.5 0 00.5.5h9a.5.5 0 00.5-.5V10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        My CV
+      </a>
+    </li>
+    <!-- Contact CTA -->
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+
+  <button class="nav-menu-toggle" id="menuToggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section style="padding:0;">
+  <div class="hero">
+    <div>
+      <p class="hero-eyebrow">Available for projects</p>
+      <h1 class="hero-title">
+        Where <strong>data</strong><br>
+        meets the<br>
+        <strong>built world.</strong>
+      </h1>
+      <p class="hero-desc">
+        I'm Dimuthu Fernando — a Quantity Surveyor, Programmer, and GIS & Data Analyst. I bridge construction, spatial intelligence and custom software into solutions that move projects forward.
+      </p>
+      <div class="hero-tags">
+        <span class="tag">Quantity Surveying</span>
+        <span class="tag">GIS & Spatial Analysis</span>
+        <span class="tag">Python · SQL</span>
+        <span class="tag">Data Visualisation</span>
+        <span class="tag">Cost Engineering</span>
+        <span class="tag">Programming</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">View my work <span class="btn-arrow">→</span></a>
+        <a href="#contact"  class="btn-outline">Get in touch</a>
+      </div>
+    </div>
+
+    <!-- Hero Data Cards -->
+    <div class="hero-visual">
+
+      <!-- Card 1 — GIS Map (full width) -->
+      <div class="hero-card">
+        <p class="hero-card-label">GIS · Spatial Coverage</p>
+        <svg viewBox="0 0 480 120" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:120px;">
+          <defs>
+            <linearGradient id="mapGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ddeaf6"/>
+              <stop offset="100%" stop-color="#b5cfe8"/>
+            </linearGradient>
+            <linearGradient id="mapGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#b5cfe8"/>
+              <stop offset="100%" stop-color="#1a5c9e" stop-opacity="0.8"/>
+            </linearGradient>
+          </defs>
+          <!-- Fine grid -->
+          <g stroke="#e2e2dc" stroke-width="0.4" opacity="0.7">
+            <line x1="0" y1="24" x2="480" y2="24"/><line x1="0" y1="48" x2="480" y2="48"/>
+            <line x1="0" y1="72" x2="480" y2="72"/><line x1="0" y1="96" x2="480" y2="96"/>
+            <line x1="60" y1="0" x2="60" y2="120"/><line x1="120" y1="0" x2="120" y2="120"/>
+            <line x1="180" y1="0" x2="180" y2="120"/><line x1="240" y1="0" x2="240" y2="120"/>
+            <line x1="300" y1="0" x2="300" y2="120"/><line x1="360" y1="0" x2="360" y2="120"/>
+            <line x1="420" y1="0" x2="420" y2="120"/>
+          </g>
+          <!-- Territory polygons -->
+          <polygon points="20,12 85,6 118,28 98,62 42,54" fill="url(#mapGrad1)" stroke="#a8c4e0" stroke-width="0.7" opacity="0.9"/>
+          <polygon points="125,4 188,10 210,38 170,58 118,44" fill="#c8dcf2" stroke="#a8c4e0" stroke-width="0.7" opacity="0.85"/>
+          <polygon points="205,14 270,8 298,36 262,62 198,52" fill="url(#mapGrad2)" stroke="#a8c4e0" stroke-width="0.7" opacity="0.85"/>
+          <polygon points="48,60 118,50 135,82 88,96 40,85" fill="#e0ecf8" stroke="#a8c4e0" stroke-width="0.7" opacity="0.9"/>
+          <polygon points="140,62 200,56 215,86 175,102 132,92" fill="#ddeaf6" stroke="#a8c4e0" stroke-width="0.7"/>
+          <polygon points="218,64 278,60 298,88 255,104 212,94" fill="#c8dcf2" stroke="#a8c4e0" stroke-width="0.7"/>
+          <polygon points="308,10 372,4 406,32 365,64 300,50" fill="#ddeaf6" stroke="#a8c4e0" stroke-width="0.7" opacity="0.9"/>
+          <polygon points="315,68 385,60 428,86 386,104 308,98" fill="url(#mapGrad1)" stroke="#a8c4e0" stroke-width="0.7"/>
+          <polygon points="392,16 456,10 476,42 450,68 386,60" fill="#b5cfe8" stroke="#a8c4e0" stroke-width="0.7" opacity="0.85"/>
+          <!-- Road network -->
+          <polyline points="0,72 120,68 240,72 360,66 480,72" fill="none" stroke="#8ab0cc" stroke-width="1.5" opacity="0.5"/>
+          <polyline points="180,0 175,60 180,120" fill="none" stroke="#8ab0cc" stroke-width="1" opacity="0.4"/>
+          <polyline points="310,0 308,50 312,120" fill="none" stroke="#8ab0cc" stroke-width="1" opacity="0.4"/>
+          <!-- Animated POI markers -->
+          <circle class="map-poi" cx="72" cy="34" r="4" fill="#1a5c9e"/>
+          <circle cx="72" cy="34" r="9" fill="none" stroke="#1a5c9e" stroke-width="0.8" opacity="0.4">
+            <animate attributeName="r" values="6;14;6" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.4;0;0.4" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle class="map-poi" cx="248" cy="28" r="3.5" fill="#2d7dd2"/>
+          <circle cx="248" cy="28" r="7" fill="none" stroke="#2d7dd2" stroke-width="0.8" opacity="0.4">
+            <animate attributeName="r" values="5;12;5" dur="2.8s" repeatCount="indefinite" begin="0.5s"/>
+            <animate attributeName="opacity" values="0.4;0;0.4" dur="2.8s" repeatCount="indefinite" begin="0.5s"/>
+          </circle>
+          <circle class="map-poi" cx="348" cy="36" r="4" fill="#1a5c9e"/>
+          <circle cx="348" cy="36" r="9" fill="none" stroke="#1a5c9e" stroke-width="0.8" opacity="0.4">
+            <animate attributeName="r" values="6;14;6" dur="3s" repeatCount="indefinite" begin="1s"/>
+            <animate attributeName="opacity" values="0.4;0;0.4" dur="3s" repeatCount="indefinite" begin="1s"/>
+          </circle>
+          <circle class="map-poi" cx="168" cy="75" r="3" fill="#2d7dd2"/>
+          <circle class="map-poi" cx="428" cy="52" r="3.5" fill="#1a5c9e"/>
+          <!-- A moving data-collection line -->
+          <line x1="0" y1="60" x2="480" y2="60" stroke="#2d7dd2" stroke-width="0.6" stroke-dasharray="8 6" opacity="0.3">
+            <animateTransform attributeName="transform" type="translate" values="0,0;480,0;0,0" dur="8s" repeatCount="indefinite"/>
+          </line>
+          <!-- Scale + coords -->
+          <rect x="396" y="100" width="76" height="16" rx="2" fill="rgba(255,255,255,0.8)"/>
+          <line x1="400" y1="108" x2="420" y2="108" stroke="#1a5c9e" stroke-width="1"/>
+          <line x1="400" y1="105" x2="400" y2="111" stroke="#1a5c9e" stroke-width="1"/>
+          <line x1="420" y1="105" x2="420" y2="111" stroke="#1a5c9e" stroke-width="1"/>
+          <text x="430" y="112" font-family="'DM Mono',monospace" font-size="8" fill="#888882">500m</text>
+          <text x="460" y="22" font-family="'DM Mono',monospace" font-size="9" fill="#888882" text-anchor="middle">N</text>
+          <line x1="460" y1="24" x2="460" y2="36" stroke="#888882" stroke-width="1"/>
+          <polygon points="456,26 460,16 464,26 460,23" fill="#888882"/>
+          <text x="2" y="11" font-family="'DM Mono',monospace" font-size="7" fill="#c0bfba">6°55'N</text>
+          <text x="2" y="35" font-family="'DM Mono',monospace" font-size="7" fill="#c0bfba">6°54'N</text>
+        </svg>
+        <!-- Bottom stats row -->
+        <div style="display:flex;gap:24px;margin-top:14px;padding-top:12px;border-top:0.5px solid var(--mid);">
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;letter-spacing:1px;color:var(--dark-mid);text-transform:uppercase;margin-bottom:2px;">Coverage</div>
+            <div style="font-size:20px;font-weight:300;color:var(--text-heading);letter-spacing:-0.8px;">340 <span style="font-size:12px;color:var(--accent-mid);">km²</span></div>
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;letter-spacing:1px;color:var(--dark-mid);text-transform:uppercase;margin-bottom:2px;">Datasets</div>
+            <div style="font-size:20px;font-weight:300;color:var(--text-heading);letter-spacing:-0.8px;">28 <span style="font-size:12px;color:var(--accent-mid);">layers</span></div>
+          </div>
+          <div>
+            <div style="font-family:var(--mono);font-size:9px;letter-spacing:1px;color:var(--dark-mid);text-transform:uppercase;margin-bottom:2px;">Accuracy</div>
+            <div style="font-size:20px;font-weight:300;color:var(--text-heading);letter-spacing:-0.8px;">±0.5 <span style="font-size:12px;color:var(--accent-mid);">m</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 — Cost Analysis -->
+      <div class="hero-card">
+        <p class="hero-card-label">Cost Analysis</p>
+        <div class="hero-card-stat">14<span>+</span></div>
+        <p class="hero-card-sub">Projects quantified</p>
+        <svg viewBox="0 0 140 58" style="width:100%;height:58px;margin-top:14px;display:block;">
+          <defs>
+            <linearGradient id="barGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#2d7dd2"/>
+              <stop offset="100%" stop-color="#1a5c9e"/>
+            </linearGradient>
+          </defs>
+          <!-- Baseline -->
+          <line x1="0" y1="52" x2="140" y2="52" stroke="#e2e2dc" stroke-width="0.5"/>
+          <rect class="bar-anim" x="2"  y="38" width="14" height="14" rx="1.5" fill="#d4d3ce"/>
+          <rect class="bar-anim" x="20" y="28" width="14" height="24" rx="1.5" fill="#b5cfe8"/>
+          <rect class="bar-anim" x="38" y="18" width="14" height="34" rx="1.5" fill="url(#barGrad)"/>
+          <rect class="bar-anim" x="56" y="22" width="14" height="30" rx="1.5" fill="url(#barGrad)"/>
+          <rect class="bar-anim" x="74" y="10" width="14" height="42" rx="1.5" fill="url(#barGrad)"/>
+          <rect class="bar-anim" x="92" y="24" width="14" height="28" rx="1.5" fill="#2d7dd2" opacity="0.7"/>
+          <rect class="bar-anim" x="110" y="4"  width="14" height="48" rx="1.5" fill="url(#barGrad)"/>
+          <!-- Trend line -->
+          <polyline points="9,45 27,35 45,24 63,28 81,16 99,30 117,8"
+            fill="none" stroke="#1a5c9e" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.5"/>
+          <!-- Active dot -->
+          <circle cx="117" cy="8" r="3" fill="#2d7dd2">
+            <animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/>
+          </circle>
+        </svg>
+        <div style="margin-top:10px;display:flex;align-items:center;gap:6px;">
+          <div style="width:6px;height:6px;border-radius:50%;background:#4caf50;"></div>
+          <span style="font-family:var(--mono);font-size:9px;color:var(--dark-mid);letter-spacing:0.5px;">+18% YoY growth</span>
+        </div>
+      </div>
+
+      <!-- Card 3 — Code & Tools -->
+      <div class="hero-card">
+        <p class="hero-card-label">Code &amp; Tools</p>
+        <svg viewBox="0 0 140 88" style="width:100%;height:88px;display:block;">
+          <rect width="140" height="88" rx="5" fill="#1e1e2e"/>
+          <!-- Tab bar -->
+          <rect x="0" y="0" width="140" height="18" rx="5" fill="#2a2a3e"/>
+          <rect x="0" y="12" width="140" height="6" fill="#2a2a3e"/>
+          <rect x="6" y="3" width="42" height="12" rx="2" fill="#1e1e2e"/>
+          <circle cx="11" cy="9" r="2.2" fill="#ff5f56"/>
+          <circle cx="18" cy="9" r="2.2" fill="#ffbd2e"/>
+          <circle cx="25" cy="9" r="2.2" fill="#27c93f"/>
+          <text x="30" y="13" font-family="'DM Mono',monospace" font-size="6.5" fill="rgba(255,255,255,0.4)">analysis.py</text>
+          <!-- Code lines -->
+          <text class="code-line" x="7" y="32" font-family="'DM Mono',monospace" font-size="7.5" fill="#7ec8e3">import <tspan fill="#c3e88d">geopandas</tspan><tspan fill="#7ec8e3"> as gpd</tspan></text>
+          <text class="code-line" x="7" y="43" font-family="'DM Mono',monospace" font-size="7.5" fill="#7ec8e3">import <tspan fill="#c3e88d">pandas</tspan><tspan fill="#7ec8e3"> as pd</tspan></text>
+          <text class="code-line" x="7" y="54" font-family="'DM Mono',monospace" font-size="7.5"><tspan fill="#bb86fc">gdf</tspan><tspan fill="#aaaaaa"> = gpd.</tspan><tspan fill="#7ec8e3">read_file(</tspan><tspan fill="#f78c6c">"cl.shp"</tspan><tspan fill="#7ec8e3">)</tspan></text>
+          <text class="code-line" x="7" y="65" font-family="'DM Mono',monospace" font-size="7.5"><tspan fill="#bb86fc">gdf</tspan><tspan fill="#aaaaaa">.</tspan><tspan fill="#7ec8e3">plot(</tspan><tspan fill="#aaaaaa">column=</tspan><tspan fill="#f78c6c">"cost"</tspan><tspan fill="#7ec8e3">)</tspan></text>
+          <!-- Blinking cursor -->
+          <text class="code-line" x="7" y="76" font-family="'DM Mono',monospace" font-size="7.5" fill="#aaaaaa">
+            <tspan>▌</tspan>
+          </text>
+          <rect x="7" y="68" width="5" height="9" fill="#7ec8e3" opacity="0">
+            <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite"/>
+          </rect>
+        </svg>
+        <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+          <span style="font-family:var(--mono);font-size:8px;padding:2px 7px;background:rgba(26,92,158,0.12);color:var(--accent);border-radius:2px;letter-spacing:0.5px;">Python</span>
+          <span style="font-family:var(--mono);font-size:8px;padding:2px 7px;background:rgba(26,92,158,0.12);color:var(--accent);border-radius:2px;letter-spacing:0.5px;">SQL</span>
+          <span style="font-family:var(--mono);font-size:8px;padding:2px 7px;background:rgba(26,92,158,0.12);color:var(--accent);border-radius:2px;letter-spacing:0.5px;">JS</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROJECTS ═══ -->
+<section id="projects">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">Selected Work</p>
+    <h2 class="section-title reveal delay-1">Projects that<br><strong>tell a story</strong> in data.</h2>
+    <p class="section-lead reveal delay-2">A cross-section of work spanning construction, geospatial analysis, and bespoke software tooling.</p>
+
+    <div class="projects-grid">
+
+      <!-- Project 1 — SpareBot AI -->
+      <a href="https://dimuthuf3rnando-arch.github.io/spier_part_shop_demo/" target="_blank" class="project-card">
+        <span class="project-arrow">↗</span>
+        <p class="project-number">No. 01</p>
+        <div class="project-visual">
+          <svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+            <defs>
+              <linearGradient id="chatBg" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#1a1a2e"/>
+                <stop offset="100%" stop-color="#0f0f1e"/>
+              </linearGradient>
+            </defs>
+            <rect width="380" height="200" fill="url(#chatBg)" rx="4"/>
+            <!-- App header -->
+            <rect class="proj-svg-el" x="0" y="0" width="380" height="36" rx="4" fill="#222240"/>
+            <rect x="0" y="28" width="380" height="8" fill="#222240"/>
+            <circle cx="20" cy="18" r="6" fill="#ff5f56" opacity="0.8"/>
+            <text class="proj-svg-el" x="34" y="22" font-family="'DM Mono',monospace" font-size="9" fill="rgba(255,255,255,0.7)">🔧 SpareBot AI — AutoParts Shop</text>
+            <circle cx="360" cy="18" r="4" fill="#27c93f" opacity="0.9"/>
+            <text x="348" y="21" font-family="'DM Mono',monospace" font-size="7" fill="#27c93f">LIVE</text>
+            <!-- Sidebar -->
+            <rect class="proj-svg-el" x="0" y="36" width="72" height="164" fill="#1a1a30"/>
+            <text x="36" y="60" font-family="'DM Mono',monospace" font-size="7" fill="rgba(255,255,255,0.3)" text-anchor="middle">CHATS</text>
+            <rect x="6" y="65" width="60" height="26" rx="3" fill="#2a2a45"/>
+            <text x="12" y="76" font-family="'DM Mono',monospace" font-size="6.5" fill="rgba(255,255,255,0.6)">🔴 Brake pads</text>
+            <text x="12" y="85" font-family="'DM Mono',monospace" font-size="5.5" fill="rgba(255,255,255,0.3)">Customer #1042</text>
+            <text x="12" y="107" font-family="'DM Mono',monospace" font-size="6.5" fill="rgba(255,255,255,0.4)">🔩 Shocks — Fit</text>
+            <text x="12" y="134" font-family="'DM Mono',monospace" font-size="6.5" fill="rgba(255,255,255,0.4)">⚙️ Clutch Axio</text>
+            <!-- Chat bubbles -->
+            <rect class="proj-svg-el" x="80" y="44" width="220" height="34" rx="6" fill="#2d7dd2" opacity="0.9"/>
+            <text x="90" y="58" font-family="'DM Sans',sans-serif" font-size="8.5" fill="white">Hello! I'm SpareBot AI — how can</text>
+            <text x="90" y="70" font-family="'DM Sans',sans-serif" font-size="8.5" fill="white">I help you find the right part?</text>
+            <text x="80" y="84" font-family="'DM Mono',monospace" font-size="6.5" fill="rgba(255,255,255,0.25)">SpareBot AI · now</text>
+            <rect class="proj-svg-el" x="138" y="90" width="196" height="24" rx="6" fill="#1e3a5f"/>
+            <text x="148" y="106" font-family="'DM Sans',sans-serif" font-size="8.5" fill="rgba(255,255,255,0.8)">Aqua shock absorbers — front pair?</text>
+            <text x="320" y="120" font-family="'DM Mono',monospace" font-size="6.5" fill="rgba(255,255,255,0.25)">You · 10:24</text>
+            <rect class="proj-svg-el" x="80" y="124" width="240" height="46" rx="6" fill="#2d7dd2" opacity="0.85"/>
+            <text x="90" y="138" font-family="'DM Sans',sans-serif" font-size="8" fill="white">✅ Yes! KYB Excel-G front pair</text>
+            <text x="90" y="149" font-family="'DM Sans',sans-serif" font-size="8" fill="white">LKR 12,500 each · 2 in stock</text>
+            <text x="90" y="162" font-family="'DM Mono',monospace" font-size="7" fill="rgba(255,255,255,0.6)">→ Reserve now? →</text>
+            <!-- Input bar -->
+            <rect x="80" y="176" width="240" height="18" rx="9" fill="#2a2a45"/>
+            <text x="92" y="188" font-family="'DM Sans',sans-serif" font-size="7.5" fill="rgba(255,255,255,0.25)">Ask me anything about parts…</text>
+            <rect x="306" y="178" width="12" height="14" rx="7" fill="#2d7dd2"/>
+            <text x="312" y="188" font-family="'DM Mono',monospace" font-size="8" fill="white" text-anchor="middle">→</text>
+            <!-- Badge -->
+            <rect x="320" y="44" width="52" height="16" rx="3" fill="#2d7dd2" opacity="0.3"/>
+            <text x="346" y="55" font-family="'DM Mono',monospace" font-size="7" fill="#7ec8e3" text-anchor="middle">AI · Claude</text>
+            <!-- Typing dots -->
+            <circle cx="85" cy="193" r="2" fill="#2d7dd2" opacity="0.4">
+              <animate attributeName="opacity" values="0.4;1;0.4" dur="1.2s" repeatCount="indefinite" begin="0s"/>
+            </circle>
+            <circle cx="92" cy="193" r="2" fill="#2d7dd2" opacity="0.4">
+              <animate attributeName="opacity" values="0.4;1;0.4" dur="1.2s" repeatCount="indefinite" begin="0.3s"/>
+            </circle>
+            <circle cx="99" cy="193" r="2" fill="#2d7dd2" opacity="0.4">
+              <animate attributeName="opacity" values="0.4;1;0.4" dur="1.2s" repeatCount="indefinite" begin="0.6s"/>
+            </circle>
+          </svg>
+        </div>
+        <h3 class="project-title">SpareBot AI — AutoParts Shop</h3>
+        <p class="project-desc">AI-powered customer service chatbot for an auto parts retailer, built with Claude API. Handles parts lookup, pricing, stock checks, and order enquiries in natural conversation — including Singlish support for local customers.</p>
+        <div class="project-tags">
+          <span class="tag">Claude API</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">AI Chat</span>
+          <span class="tag">HTML/CSS</span>
+        </div>
+      </a>
+
+      <!-- Project 2 — PressureLog -->
+      <a href="https://dimuthuf3rnando-arch.github.io/pressure_logger_data_collector/" target="_blank" class="project-card">
+        <span class="project-arrow">↗</span>
+        <p class="project-number">No. 02</p>
+        <div class="project-visual">
+          <svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+            <defs>
+              <linearGradient id="mapBg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#eef5fb"/>
+                <stop offset="100%" stop-color="#dce8f4"/>
+              </linearGradient>
+            </defs>
+            <rect width="380" height="200" fill="url(#mapBg)"/>
+            <!-- Header -->
+            <rect class="proj-svg-el" x="0" y="0" width="380" height="32" fill="#111110"/>
+            <text x="14" y="20" font-family="'DM Mono',monospace" font-size="9" fill="rgba(255,255,255,0.7)">PressureLog — Field Logger System</text>
+            <rect x="330" y="8" width="40" height="16" rx="3" fill="#1a5c9e" opacity="0.8"/>
+            <text x="350" y="19" font-family="'DM Mono',monospace" font-size="7" fill="white" text-anchor="middle">SYNC ✓</text>
+            <!-- Map area -->
+            <rect x="0" y="32" width="220" height="168" fill="#e8f2fa"/>
+            <line x1="0" y1="80" x2="220" y2="80" stroke="#c8d8e8" stroke-width="4" stroke-linecap="round"/>
+            <line x1="0" y1="130" x2="220" y2="130" stroke="#c8d8e8" stroke-width="3" stroke-linecap="round"/>
+            <line x1="80" y1="32" x2="80" y2="200" stroke="#c8d8e8" stroke-width="4" stroke-linecap="round"/>
+            <line x1="150" y1="32" x2="150" y2="200" stroke="#c8d8e8" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Logger markers -->
+            <circle cx="55" cy="65" r="8" fill="#1a5c9e" stroke="white" stroke-width="2"/>
+            <circle cx="55" cy="65" r="14" fill="none" stroke="#1a5c9e" stroke-width="1" opacity="0.4">
+              <animate attributeName="r" values="8;20;8" dur="2s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="0.4;0;0.4" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <text x="55" y="68" font-family="'DM Mono',monospace" font-size="7" fill="white" text-anchor="middle">P1</text>
+            <circle cx="135" cy="58" r="7" fill="#2d7dd2" stroke="white" stroke-width="2"/>
+            <circle cx="135" cy="58" r="13" fill="none" stroke="#2d7dd2" stroke-width="1" opacity="0.4">
+              <animate attributeName="r" values="7;18;7" dur="2.4s" repeatCount="indefinite" begin="0.5s"/>
+              <animate attributeName="opacity" values="0.4;0;0.4" dur="2.4s" repeatCount="indefinite" begin="0.5s"/>
+            </circle>
+            <text x="135" y="61" font-family="'DM Mono',monospace" font-size="7" fill="white" text-anchor="middle">P2</text>
+            <circle cx="190" cy="115" r="7" fill="#1a5c9e" stroke="white" stroke-width="2"/>
+            <text x="190" y="118" font-family="'DM Mono',monospace" font-size="7" fill="white" text-anchor="middle">P3</text>
+            <circle cx="40" cy="155" r="6" fill="#888882" stroke="white" stroke-width="1.5" opacity="0.7"/>
+            <text x="40" y="158" font-family="'DM Mono',monospace" font-size="6" fill="white" text-anchor="middle">P4</text>
+            <rect x="4" y="188" width="80" height="12" rx="2" fill="rgba(255,255,255,0.7)"/>
+            <text x="8" y="197" font-family="'DM Mono',monospace" font-size="7" fill="#888882">© OpenStreetMap</text>
+            <!-- List panel -->
+            <rect class="proj-svg-el" x="220" y="32" width="160" height="168" fill="white" stroke="#e2e2dc" stroke-width="0.5"/>
+            <rect x="220" y="32" width="160" height="22" fill="#f7f6f3"/>
+            <text x="228" y="46" font-family="'DM Mono',monospace" font-size="7.5" fill="#888882">LOGGERS · 3 ACTIVE</text>
+            <rect class="proj-row-reveal" x="224" y="58" width="152" height="34" rx="3" fill="#f0f6fd" stroke="#c8dcf2" stroke-width="0.5"/>
+            <circle cx="234" cy="70" r="5" fill="#1a5c9e"/>
+            <text x="245" y="67" font-family="'DM Sans',sans-serif" font-size="8" fill="#111110" font-weight="500">Logger P-001</text>
+            <text x="245" y="78" font-family="'DM Mono',monospace" font-size="6.5" fill="#888882">6°54'22"N · Active · 3d 14h</text>
+            <rect x="350" y="60" width="22" height="12" rx="2" fill="#1a5c9e" opacity="0.15"/>
+            <text x="361" y="69" font-family="'DM Mono',monospace" font-size="6" fill="#1a5c9e" text-anchor="middle">VIEW</text>
+            <rect class="proj-row-reveal" x="224" y="96" width="152" height="34" rx="3" fill="white" stroke="#e2e2dc" stroke-width="0.5"/>
+            <circle cx="234" cy="108" r="5" fill="#2d7dd2"/>
+            <text x="245" y="105" font-family="'DM Sans',sans-serif" font-size="8" fill="#111110" font-weight="500">Logger P-002</text>
+            <text x="245" y="116" font-family="'DM Mono',monospace" font-size="6.5" fill="#888882">6°54'31"N · Active · 1d 6h</text>
+            <rect class="proj-row-reveal" x="224" y="134" width="152" height="34" rx="3" fill="white" stroke="#e2e2dc" stroke-width="0.5"/>
+            <circle cx="234" cy="146" r="5" fill="#1a5c9e"/>
+            <text x="245" y="143" font-family="'DM Sans',sans-serif" font-size="8" fill="#111110" font-weight="500">Logger P-003</text>
+            <text x="245" y="154" font-family="'DM Mono',monospace" font-size="6.5" fill="#888882">6°53'58"N · Active · 7h 22m</text>
+            <rect x="224" y="175" width="152" height="20" rx="3" fill="#111110"/>
+            <text x="300" y="188" font-family="'DM Mono',monospace" font-size="7.5" fill="white" text-anchor="middle">Export Selected · CSV / XLSX</text>
+            <!-- Sync bar -->
+            <rect x="224" y="54" width="0" height="2" rx="1" fill="#1a5c9e" opacity="0.5">
+              <animate attributeName="width" values="0;152;0" dur="3s" repeatCount="indefinite"/>
+            </rect>
+          </svg>
+        </div>
+        <h3 class="project-title">PressureLog — Field Logger System</h3>
+        <p class="project-desc">Firebase-backed field management system for deploying and tracking pressure loggers in-situ. Features GPS-aware deployment, real-time Leaflet mapping with marker clustering, CSV/Excel export, and full offline-first sync across devices.</p>
+        <div class="project-tags">
+          <span class="tag">Firebase</span>
+          <span class="tag">Leaflet.js</span>
+          <span class="tag">GPS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">GIS</span>
+        </div>
+      </a>
+
+      <!-- Project 3 — BidEval -->
+      <a href="https://dimuthuf3rnando-arch.github.io/Bideval/" target="_blank" class="project-card">
+        <span class="project-arrow">↗</span>
+        <p class="project-number">No. 03</p>
+        <div class="project-visual">
+          <svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+            <rect width="380" height="200" fill="#f7f6f3"/>
+            <rect class="proj-svg-el" x="0" y="0" width="380" height="32" fill="#111110"/>
+            <text x="14" y="14" font-family="'DM Mono',monospace" font-size="7" fill="rgba(255,255,255,0.4)">BIDEVAL · PROCUREMENT · SBD 1</text>
+            <text x="14" y="25" font-family="'DM Sans',sans-serif" font-size="10" font-weight="500" fill="white">Evaluate Bids with Precision &amp; Confidence</text>
+            <rect x="330" y="7" width="40" height="18" rx="3" fill="#1a5c9e"/>
+            <text x="350" y="18" font-family="'DM Mono',monospace" font-size="6.5" fill="white" text-anchor="middle">SBD 1 ✓</text>
+            <!-- Progress bar -->
+            <rect x="10" y="38" width="360" height="6" rx="3" fill="#e2e2dc"/>
+            <rect class="proj-path-draw" x="10" y="38" width="216" height="6" rx="3" fill="#1a5c9e"
+              style="stroke:none;stroke-dasharray:none;stroke-dashoffset:0;
+                     transform-origin:left center;transform:scaleX(0);
+                     transition:transform 0.9s cubic-bezier(0.22,1,0.36,1) 0.3s;"/>
+            <text x="10" y="52" font-family="'DM Mono',monospace" font-size="6.5" fill="#888882">Step 4 of 9 — Financial Evaluation</text>
+            <text x="360" y="52" font-family="'DM Mono',monospace" font-size="6.5" fill="#1a5c9e" text-anchor="end">60%</text>
+            <!-- Table header -->
+            <rect x="10" y="58" width="360" height="20" rx="2" fill="#111110"/>
+            <text x="18"  y="71" font-family="'DM Mono',monospace" font-size="7" fill="rgba(255,255,255,0.5)">Bidder</text>
+            <text x="130" y="71" font-family="'DM Mono',monospace" font-size="7" fill="rgba(255,255,255,0.5)">Bid Price (LKR)</text>
+            <text x="235" y="71" font-family="'DM Mono',monospace" font-size="7" fill="rgba(255,255,255,0.5)">Compliance</text>
+            <text x="320" y="71" font-family="'DM Mono',monospace" font-size="7" fill="rgba(255,255,255,0.5)">Rank</text>
+            <!-- Bid rows -->
+            <rect class="proj-row-reveal" x="10" y="80"  width="360" height="22" rx="2" fill="#e8f5e9" stroke="#4caf50" stroke-width="0.5"/>
+            <text x="18"  y="94" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#1a3a2a" font-weight="500">Contractor A</text>
+            <text x="130" y="94" font-family="'DM Mono',monospace" font-size="8" fill="#1a3a2a">12,450,000</text>
+            <rect x="235" y="83" width="48" height="12" rx="6" fill="#4caf50" opacity="0.15"/>
+            <text x="259" y="93" font-family="'DM Mono',monospace" font-size="7" fill="#4caf50" text-anchor="middle">PASS</text>
+            <rect x="318" y="83" width="18" height="12" rx="6" fill="#4caf50"/>
+            <text x="327" y="93" font-family="'DM Mono',monospace" font-size="8" fill="white" text-anchor="middle">1</text>
+            <rect class="proj-row-reveal" x="10" y="104" width="360" height="22" rx="2" fill="white" stroke="#e2e2dc" stroke-width="0.5"/>
+            <text x="18"  y="118" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#2c2c28">Contractor B</text>
+            <text x="130" y="118" font-family="'DM Mono',monospace" font-size="8" fill="#2c2c28">13,180,000</text>
+            <rect x="235" y="107" width="48" height="12" rx="6" fill="#4caf50" opacity="0.1"/>
+            <text x="259" y="117" font-family="'DM Mono',monospace" font-size="7" fill="#4caf50" text-anchor="middle">PASS</text>
+            <text x="327" y="117" font-family="'DM Mono',monospace" font-size="8" fill="#888882" text-anchor="middle">2</text>
+            <rect class="proj-row-reveal" x="10" y="128" width="360" height="22" rx="2" fill="#fff8f0" stroke="#e2e2dc" stroke-width="0.5"/>
+            <text x="18"  y="142" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#2c2c28">Contractor C</text>
+            <text x="130" y="142" font-family="'DM Mono',monospace" font-size="8" fill="#2c2c28">11,890,000</text>
+            <rect x="235" y="131" width="48" height="12" rx="6" fill="#ff9800" opacity="0.15"/>
+            <text x="259" y="141" font-family="'DM Mono',monospace" font-size="7" fill="#ff9800" text-anchor="middle">REVIEW</text>
+            <text x="327" y="141" font-family="'DM Mono',monospace" font-size="8" fill="#888882" text-anchor="middle">—</text>
+            <!-- Stats footer -->
+            <rect class="proj-svg-el" x="10"  y="156" width="114" height="36" rx="3" fill="white" stroke="#e2e2dc" stroke-width="0.5"/>
+            <text x="18" y="168" font-family="'DM Mono',monospace" font-size="6.5" fill="#888882">LOWEST BID</text>
+            <text x="18" y="182" font-family="'DM Sans',sans-serif" font-size="11" font-weight="500" fill="#111110">11.89M</text>
+            <rect class="proj-svg-el" x="130" y="156" width="114" height="36" rx="3" fill="white" stroke="#e2e2dc" stroke-width="0.5"/>
+            <text x="138" y="168" font-family="'DM Mono',monospace" font-size="6.5" fill="#888882">VARIANCE</text>
+            <text x="138" y="182" font-family="'DM Sans',sans-serif" font-size="11" font-weight="500" fill="#1a5c9e">+10.8%</text>
+            <rect class="proj-svg-el" x="250" y="156" width="120" height="36" rx="3" fill="#111110"/>
+            <text x="310" y="168" font-family="'DM Mono',monospace" font-size="6.5" fill="rgba(255,255,255,0.4)" text-anchor="middle">CRITERIA CHECKS</text>
+            <text x="310" y="182" font-family="'DM Sans',sans-serif" font-size="11" font-weight="500" fill="white" text-anchor="middle">22 / 22 ✓</text>
+            <!-- Animated pulse on progress -->
+            <rect x="226" y="38" width="8" height="6" rx="3" fill="white" opacity="0.6">
+              <animate attributeName="opacity" values="0;0.8;0" dur="1.5s" repeatCount="indefinite"/>
+            </rect>
+          </svg>
+        </div>
+        <h3 class="project-title">BidEval — Procurement Evaluation System</h3>
+        <p class="project-desc">Structured SBD 1-compliant bid evaluation framework that guides procurement officers through 9 steps — from documentary review to financial ranking. Auto-calculates variance, enforces 22+ criteria checks, and exports audit-ready Excel reports. Works fully offline.</p>
+        <div class="project-tags">
+          <span class="tag">SBD 1</span>
+          <span class="tag">Procurement</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">Excel Export</span>
+          <span class="tag">Offline-First</span>
+        </div>
+      </a>
+
+      <!-- Project 4 — BoQ Generator -->
+      <a href="#" class="project-card">
+        <span class="project-arrow">↗</span>
+        <p class="project-number">No. 04</p>
+        <div class="project-visual">
+          <svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+            <rect width="380" height="200" fill="#f7f6f3"/>
+            <!-- Table header -->
+            <rect class="proj-svg-el" x="10" y="10" width="360" height="28" rx="3" fill="#111110"/>
+            <text x="20"  y="28" font-family="'DM Mono',monospace" font-size="8" fill="rgba(255,255,255,0.5)">Item</text>
+            <text x="100" y="28" font-family="'DM Mono',monospace" font-size="8" fill="rgba(255,255,255,0.5)">Description</text>
+            <text x="238" y="28" font-family="'DM Mono',monospace" font-size="8" fill="rgba(255,255,255,0.5)">Qty</text>
+            <text x="285" y="28" font-family="'DM Mono',monospace" font-size="8" fill="rgba(255,255,255,0.5)">Rate</text>
+            <text x="335" y="28" font-family="'DM Mono',monospace" font-size="8" fill="rgba(255,255,255,0.5)">Total</text>
+            <!-- Rows -->
+            <rect class="proj-row-reveal" x="10" y="44"  width="360" height="24" rx="2" fill="white" stroke="#eeede9" stroke-width="0.5"/>
+            <text x="20"  y="60" font-family="'DM Mono',monospace" font-size="8" fill="#888882">A1.01</text>
+            <text x="100" y="60" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#2c2c28">Excavation in rock</text>
+            <text x="238" y="60" font-family="'DM Mono',monospace" font-size="8" fill="#2c2c28">240 m³</text>
+            <text x="285" y="60" font-family="'DM Mono',monospace" font-size="8" fill="#2c2c28">85.00</text>
+            <text x="330" y="60" font-family="'DM Mono',monospace" font-size="8" fill="#1a5c9e">20,400</text>
+            <rect class="proj-row-reveal" x="10" y="72"  width="360" height="24" rx="2" fill="#f7f6f3" stroke="#eeede9" stroke-width="0.5"/>
+            <text x="20"  y="88" font-family="'DM Mono',monospace" font-size="8" fill="#888882">A1.02</text>
+            <text x="100" y="88" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#2c2c28">Formwork to slab soffit</text>
+            <text x="238" y="88" font-family="'DM Mono',monospace" font-size="8" fill="#2c2c28">580 m²</text>
+            <text x="285" y="88" font-family="'DM Mono',monospace" font-size="8" fill="#2c2c28">42.00</text>
+            <text x="330" y="88" font-family="'DM Mono',monospace" font-size="8" fill="#1a5c9e">24,360</text>
+            <rect class="proj-row-reveal" x="10" y="100" width="360" height="24" rx="2" fill="white" stroke="#eeede9" stroke-width="0.5"/>
+            <text x="20"  y="116" font-family="'DM Mono',monospace" font-size="8" fill="#888882">A1.03</text>
+            <text x="100" y="116" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#2c2c28">High yield rebar supply &amp; fix</text>
+            <text x="238" y="116" font-family="'DM Mono',monospace" font-size="8" fill="#2c2c28">18.4 t</text>
+            <text x="285" y="116" font-family="'DM Mono',monospace" font-size="8" fill="#2c2c28">1,200</text>
+            <text x="326" y="116" font-family="'DM Mono',monospace" font-size="8" fill="#1a5c9e">22,080</text>
+            <rect class="proj-row-reveal" x="10" y="128" width="360" height="24" rx="2" fill="#f7f6f3" stroke="#eeede9" stroke-width="0.5"/>
+            <text x="20"  y="144" font-family="'DM Mono',monospace" font-size="8" fill="#888882">A1.04</text>
+            <text x="100" y="144" font-family="'DM Sans',sans-serif" font-size="8.5" fill="#2c2c28">Concrete C30/37 pour &amp; cure</text>
+            <text x="238" y="144" font-family="'DM Mono',monospace" font-size="8" fill="#2c2c28">320 m³</text>
+            <text x="285" y="144" font-family="'DM Mono',monospace" font-size="8" fill="#2c2c28">165.00</text>
+            <text x="326" y="144" font-family="'DM Mono',monospace" font-size="8" fill="#1a5c9e">52,800</text>
+            <!-- Subtotal -->
+            <rect x="10" y="158" width="360" height="2" fill="#d4d3ce"/>
+            <rect class="proj-svg-el" x="10" y="162" width="360" height="24" rx="2" fill="#f0f0ec"/>
+            <text x="20"  y="178" font-family="'DM Mono',monospace" font-size="8" fill="#888882">A1 — Substructure Works</text>
+            <text x="326" y="178" font-family="'DM Mono',monospace" font-size="8" fill="#888882">119,640</text>
+            <!-- Total bar -->
+            <rect class="proj-svg-el" x="10" y="188" width="360" height="8" rx="2" fill="#111110"/>
+            <text x="280" y="195" font-family="'DM Mono',monospace" font-size="6.5" fill="rgba(255,255,255,0.5)">TOTAL CONTRACT SUM</text>
+            <text x="368" y="195" font-family="'DM Mono',monospace" font-size="6.5" fill="white" text-anchor="end">119,640.00</text>
+            <!-- Animated cursor on last row -->
+            <rect x="105" y="163" width="3" height="10" fill="#1a5c9e" opacity="0">
+              <animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite"/>
+            </rect>
+          </svg>
+        </div>
+        <h3 class="project-title">Automated BoQ Generator</h3>
+        <p class="project-desc">Python tool that reads IFC/CAD takeoff data and outputs a formatted, NRM-compliant Bill of Quantities in Excel — eliminating manual entry errors and cutting preparation time significantly.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">IFC</span>
+          <span class="tag">NRM</span>
+          <span class="tag">openpyxl</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STICKY SCROLL STACK: services → quote → process ═══ -->
+<div class="sticky-stack">
+
+<!-- ═══ SERVICES — sticky inside stack ═══ -->
+<section id="services">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">What I do</p>
+    <h2 class="section-title reveal delay-1">Three disciplines,<br><strong>one perspective.</strong></h2>
+    <p class="section-lead reveal delay-2">I work at the intersection of construction, geography, and code — bringing a rare combination of technical depth and real site experience to every engagement.</p>
+
+    <div class="services-grid">
+      <div class="service-item reveal">
+        <p class="service-num">No. 1</p>
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <rect x="2" y="3" width="18" height="16" rx="2" stroke="#1a5c9e" stroke-width="1.3"/>
+            <line x1="2" y1="8" x2="20" y2="8" stroke="#1a5c9e" stroke-width="1.3"/>
+            <line x1="7" y1="3" x2="7" y2="8" stroke="#1a5c9e" stroke-width="1.3"/>
+            <line x1="6" y1="13" x2="16" y2="13" stroke="#1a5c9e" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="6" y1="16.5" x2="12" y2="16.5" stroke="#1a5c9e" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Quantity Surveying</h3>
+        <p class="service-desc">Precise cost management across the full project lifecycle — from early feasibility estimates through to final account. I work to NRM, CESMM3, ICTAD, and FIDIC standards, ensuring every figure is defensible and audit-ready.</p>
+        <div class="service-deliverables">
+          <span class="service-deliverable">Preliminary &amp; detailed cost plans</span>
+          <span class="service-deliverable">Bill of Quantities preparation</span>
+          <span class="service-deliverable">Tender evaluation &amp; procurement</span>
+          <span class="service-deliverable">Variation assessment &amp; final account</span>
+          <span class="service-deliverable">Contract administration (FIDIC/ICTAD)</span>
+        </div>
+        <div class="service-footer">NRM · CESMM3 · ICTAD · FIDIC</div>
+      </div>
+
+      <div class="service-item reveal delay-1">
+        <p class="service-num">No. 2</p>
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <circle cx="11" cy="11" r="8.5" stroke="#1a5c9e" stroke-width="1.3"/>
+            <line x1="11" y1="2.5" x2="11" y2="19.5" stroke="#1a5c9e" stroke-width="1.3"/>
+            <path d="M2.5 11 Q6 7 11 11 Q16 15 19.5 11" stroke="#1a5c9e" stroke-width="1.3" fill="none"/>
+            <line x1="2.5" y1="11" x2="19.5" y2="11" stroke="#1a5c9e" stroke-width="1.2" opacity="0.35"/>
+            <circle cx="11" cy="11" r="2" fill="#1a5c9e" opacity="0.4"/>
+          </svg>
+        </div>
+        <h3 class="service-title">GIS & Spatial Analysis</h3>
+        <p class="service-desc">From raw geodata to decision-ready spatial insight. I process, analyse, and visualise geospatial datasets using industry tools and custom Python pipelines — for infrastructure planning, site assessment, and field operations.</p>
+        <div class="service-deliverables">
+          <span class="service-deliverable">Site suitability &amp; constraint mapping</span>
+          <span class="service-deliverable">Network routing &amp; optimisation</span>
+          <span class="service-deliverable">Interactive web maps (Leaflet / Mapbox)</span>
+          <span class="service-deliverable">Remote sensing &amp; satellite analysis</span>
+          <span class="service-deliverable">PostGIS spatial database design</span>
+        </div>
+        <div class="service-footer">QGIS · ArcGIS · GeoPandas · PostGIS</div>
+      </div>
+
+      <div class="service-item reveal delay-2">
+        <p class="service-num">No. 3</p>
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <rect x="2" y="5" width="18" height="14" rx="2" stroke="#1a5c9e" stroke-width="1.3"/>
+            <path d="M7 10 L5.5 11.5 L7 13" stroke="#1a5c9e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M15 10 L16.5 11.5 L15 13" stroke="#1a5c9e" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="10" y1="14" x2="12" y2="9" stroke="#1a5c9e" stroke-width="1.2" stroke-linecap="round"/>
+            <line x1="9"  y1="3"  x2="9"  y2="6" stroke="#1a5c9e" stroke-width="1.3"/>
+            <line x1="13" y1="3"  x2="13" y2="6" stroke="#1a5c9e" stroke-width="1.3"/>
+          </svg>
+        </div>
+        <h3 class="service-title">Data Engineering & Software</h3>
+        <p class="service-desc">Custom tools, automated pipelines, and decision-support applications built in Python, SQL, and JavaScript. I turn complex construction and spatial data into clean, usable products — from BoQ automation to AI-powered field apps.</p>
+        <div class="service-deliverables">
+          <span class="service-deliverable">Python automation &amp; data pipelines</span>
+          <span class="service-deliverable">Dashboard &amp; reporting systems</span>
+          <span class="service-deliverable">AI-integrated web applications</span>
+          <span class="service-deliverable">Excel/VBA tooling &amp; BoQ automation</span>
+          <span class="service-deliverable">Firebase real-time field systems</span>
+        </div>
+        <div class="service-footer">Python · SQL · JavaScript · Firebase</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ QUOTE — sticky ═══ -->
+<div class="quote-section">
+  <p class="quote-text reveal">"Precision in measurement, clarity in data, and intelligence in space — the foundation of every good project decision."</p>
+  <p class="quote-attr reveal delay-1">— Dimuthu Fernando</p>
+</div>
+
+<!-- ═══ PROCESS — slides on top ═══ -->
+<div class="process-sticky-wrap">
+  <section id="process">
+    <div class="section-inner">
+      <p class="section-eyebrow">How I work</p>
+      <h2 class="section-title">A clear process<br><strong>every time.</strong></h2>
+      <p class="section-lead">From first brief to final deliverable, a structured workflow ensures nothing falls through the gaps.</p>
+      <div class="process-steps">
+        <div class="process-step reveal">
+          <p class="process-step-num">No. 1</p>
+          <h3 class="process-step-title">Brief &amp; Scope</h3>
+          <p class="process-step-desc">Understand project goals, data sources available, and expected deliverables. Define success criteria upfront.</p>
+        </div>
+        <div class="process-step reveal delay-1">
+          <p class="process-step-num">No. 2</p>
+          <h3 class="process-step-title">Data Gathering</h3>
+          <p class="process-step-desc">Site visits, document review, spatial data acquisition, and takeoff. All measurements verified and traceable.</p>
+        </div>
+        <div class="process-step reveal delay-2">
+          <p class="process-step-num">No. 3</p>
+          <h3 class="process-step-title">Analysis &amp; Build</h3>
+          <p class="process-step-desc">Quantification, GIS processing, or code development — depending on the project type. Iterated with your feedback.</p>
+        </div>
+        <div class="process-step reveal delay-3">
+          <p class="process-step-num">No. 4</p>
+          <h3 class="process-step-title">Validation</h3>
+          <p class="process-step-desc">Peer-checking of all outputs. Variance analysis and sense-checks against benchmarks before delivery.</p>
+        </div>
+        <div class="process-step reveal delay-4">
+          <p class="process-step-num">No. 5</p>
+          <h3 class="process-step-title">Delivery</h3>
+          <p class="process-step-desc">Clean reports, maps, or tools handed over in your preferred format — with documentation and support included.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div><!-- end process-sticky-wrap -->
+</div><!-- end sticky-stack -->
+
+<!-- ═══ SKILLS ═══ -->
+<section id="skills">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">Expertise</p>
+    <h2 class="section-title reveal delay-1">Tools &amp; <strong>Technologies.</strong></h2>
+    <p class="section-lead reveal delay-2">A practical toolkit built across years of real-world projects — not just course certificates.</p>
+    <div class="skills-layout">
+      <div class="skills-col reveal reveal-left">
+        <div class="skills-group">
+          <p class="skills-group-label">Construction &amp; QS</p>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">Quantity Surveying (NRM/CESMM3)</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="99"></div></div>
+              <span class="skill-pct">99%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">Cost Planning</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="90"></div></div>
+              <span class="skill-pct">90%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">Hydraulic & BIM modeling</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="90"></div></div>
+              <span class="skill-pct">90%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">Engineerin Drawinngs</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="92"></div></div>
+              <span class="skill-pct">92%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">Contract Administration (FIDIC)</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="85"></div></div>
+              <span class="skill-pct">85%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">Bill of Quantities</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="97"></div></div>
+              <span class="skill-pct">97%</span>
+            </div>
+          </div>
+        </div>
+        <div class="skills-group">
+          <p class="skills-group-label">GIS &amp; Spatial</p>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">QGIS / ArcGIS</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="96"></div></div>
+              <span class="skill-pct">86%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">GeoPandas / Shapely</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="96"></div></div>
+              <span class="skill-pct">96%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">PostGIS / Spatial SQL</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="93"></div></div>
+              <span class="skill-pct">93%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">Leaflet.js / Web Mapping</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="95"></div></div>
+              <span class="skill-pct">95%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">Remote Sensing</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="94"></div></div>
+              <span class="skill-pct">94%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="skills-col reveal reveal-right delay-1">
+        <div class="skills-group">
+          <p class="skills-group-label">Programming &amp; Data</p>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">Python</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="92"></div></div>
+              <span class="skill-pct">92%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">SQL / PostgreSQL</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="89"></div></div>
+              <span class="skill-pct">89%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">Data Visualisation (Plotly/Matplotlib)</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="88"></div></div>
+              <span class="skill-pct">88%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">Excel / VBA Automation</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="93"></div></div>
+              <span class="skill-pct">93%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">JavaScript / HTML / CSS</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="96"></div></div>
+              <span class="skill-pct">96%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">React / Node.js</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="93"></div></div>
+              <span class="skill-pct">93%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">Firebase / Cloud Databases</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="75"></div></div>
+              <span class="skill-pct">75%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">Git / Version Control</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="73"></div></div>
+              <span class="skill-pct">73%</span>
+            </div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-info"><span class="skill-name">Machine Learning (sklearn)</span></div>
+            <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+              <div class="skill-bar-wrap"><div class="skill-bar" data-width="62"></div></div>
+              <span class="skill-pct">62%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="section-inner">
+    <p class="section-eyebrow reveal">Get in touch</p>
+    <h2 class="section-title reveal delay-1">Let's work<br><strong>together.</strong></h2>
+    <p class="section-lead reveal delay-2">Have a project that needs precise cost management, spatial intelligence, or custom software? I'd love to hear about it.</p>
+    <div class="contact-layout">
+      <div class="contact-form reveal reveal-left">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First name</label>
+            <input type="text" class="form-input" placeholder="Jane">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last name</label>
+            <input type="text" class="form-input" placeholder="Smith">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="jane@company.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Project type</label>
+          <input type="text" class="form-input" placeholder="e.g. Cost plan, GIS analysis, Data tool…">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Tell me about your project…"></textarea>
+        </div>
+        <button class="btn-primary" style="align-self:flex-start;cursor:pointer;border:none;">
+          Send message <span class="btn-arrow">→</span>
+        </button>
+      </div>
+      <div class="contact-info reveal reveal-right delay-1">
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <rect x="1.5" y="3.5" width="15" height="11" rx="1.5" stroke="#1a5c9e" stroke-width="1.2"/>
+              <path d="M1.5 6 L9 10.5 L16.5 6" stroke="#1a5c9e" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <div>
+            <p class="contact-info-label">Email</p>
+            <p class="contact-info-value">dimuthu.fernand@gmail.com</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <circle cx="9" cy="7" r="2.8" stroke="#1a5c9e" stroke-width="1.2"/>
+              <path d="M9 16 C9 16 2 11.5 2 7 C2 3.7 5.13 1 9 1 C12.87 1 16 3.7 16 7 C16 11.5 9 16 9 16Z" stroke="#1a5c9e" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <div>
+            <p class="contact-info-label">Location</p>
+            <p class="contact-info-value">Panadura, Sri Lanka · Remote &amp; On-site</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <rect x="1.5" y="1.5" width="15" height="15" rx="2.5" stroke="#1a5c9e" stroke-width="1.2"/>
+              <path d="M5 13V7.5M8 13V10M11 13V5.5M14 13V8" stroke="#1a5c9e" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div>
+            <p class="contact-info-label">LinkedIn</p>
+            <p class="contact-info-value">linkedin.com/in/dimuthufernando</p>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M9 1.5C4.86 1.5 1.5 4.86 1.5 9C1.5 12.32 3.6 15.14 6.57 16.15C6.94 16.22 7.07 15.99 7.07 15.8C7.07 15.62 7.06 15.08 7.06 14.48C5.25 14.88 4.82 13.72 4.82 13.72C4.48 12.85 3.99 12.62 3.99 12.62C3.32 12.17 4.04 12.18 4.04 12.18C4.78 12.23 5.17 12.94 5.17 12.94C5.83 14.07 6.9 13.75 7.1 13.56C7.17 13.09 7.36 12.77 7.57 12.59C6.15 12.41 4.66 11.86 4.66 9.41C4.66 8.58 4.95 7.9 5.19 7.38C5.11 7.2 4.86 6.41 5.27 5.35C5.27 5.35 5.88 5.16 7.06 5.97C7.55 5.81 8.07 5.73 8.6 5.73C9.12 5.73 9.65 5.81 10.13 5.97C11.31 5.16 11.92 5.35 11.92 5.35C12.33 6.41 12.08 7.2 12 7.38C12.25 7.9 12.53 8.58 12.53 9.41C12.53 11.87 11.04 12.41 9.61 12.58C9.87 12.8 10.1 13.23 10.1 13.89C10.1 14.83 10.09 15.6 10.09 15.8C10.09 15.99 10.22 16.22 10.6 16.15C13.4 15.14 15.5 12.32 15.5 9C15.5 4.86 12.14 1.5 9 1.5Z" fill="#1a5c9e"/>
+            </svg>
+          </div>
+          <div>
+            <p class="contact-info-label">GitHub</p>
+            <p class="contact-info-value">github.com/dimuthuf3rnando-arch</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand-col">
+      <div class="footer-brand">
+        <div class="footer-brand-dot"></div>
+        Dimuthu Fernando
+      </div>
+      <p class="footer-tagline">Quantity Surveyor, Programmer, and GIS Analyst bridging construction economics, spatial intelligence, and custom software.</p>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/dimuthu-fernando-41a1b832b?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" class="footer-social-link" aria-label="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <rect x="1.5" y="1.5" width="13" height="13" rx="2" stroke="rgba(255,255,255,0.4)" stroke-width="1.1"/>
+            <line x1="4.5" y1="7" x2="4.5" y2="11.5" stroke="rgba(255,255,255,0.5)" stroke-width="1.1" stroke-linecap="round"/>
+            <circle cx="4.5" cy="5" r="0.8" fill="rgba(255,255,255,0.5)"/>
+            <path d="M7 7 L7 11.5 M7 8.5 C7 7.5 11.5 6.8 11.5 9.5 L11.5 11.5" stroke="rgba(255,255,255,0.5)" stroke-width="1.1" stroke-linecap="round"/>
+          </svg>
+        </a>
+        <a href="https://github.com/dimuthuf3rnando-arch" target="_blank" class="footer-social-link" aria-label="GitHub">
+          <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
+            <path d="M9 1.5C4.86 1.5 1.5 4.86 1.5 9C1.5 12.32 3.6 15.14 6.57 16.15C6.94 16.22 7.07 15.99 7.07 15.8C7.07 15.62 7.06 15.08 7.06 14.48C5.25 14.88 4.82 13.72 4.82 13.72C4.48 12.85 3.99 12.62 3.99 12.62C3.32 12.17 4.04 12.18 4.04 12.18C4.78 12.23 5.17 12.94 5.17 12.94C5.83 14.07 6.9 13.75 7.1 13.56C7.17 13.09 7.36 12.77 7.57 12.59C6.15 12.41 4.66 11.86 4.66 9.41C4.66 8.58 4.95 7.9 5.19 7.38C5.11 7.2 4.86 6.41 5.27 5.35C5.27 5.35 5.88 5.16 7.06 5.97C7.55 5.81 8.07 5.73 8.6 5.73C9.12 5.73 9.65 5.81 10.13 5.97C11.31 5.16 11.92 5.35 11.92 5.35C12.33 6.41 12.08 7.2 12 7.38C12.25 7.9 12.53 8.58 12.53 9.41C12.53 11.87 11.04 12.41 9.61 12.58C9.87 12.8 10.1 13.23 10.1 13.89C10.1 14.83 10.09 15.6 10.09 15.8C10.09 15.99 10.22 16.22 10.6 16.15C13.4 15.14 15.5 12.32 15.5 9C15.5 4.86 12.14 1.5 9 1.5Z" fill="rgba(255,255,255,0.4)"/>
+          </svg>
+        </a>
+        <a href="dimuthu.fernand@gmail.com" target="_blank" class="footer-social-link" aria-label="Email">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <rect x="1.5" y="3" width="13" height="10" rx="1.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.1"/>
+            <path d="M1.5 5.5 L8 9 L14.5 5.5" stroke="rgba(255,255,255,0.4)" stroke-width="1.1"/>
+          </svg>
+        </a>
+      </div>
+      <div class="footer-status">
+        <span class="footer-status-dot"></span>
+        Available for new projects
+      </div>
+    </div>
+    <div>
+      <p class="footer-col-title">Navigation</p>
+      <ul class="footer-col-links">
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Services</p>
+      <ul class="footer-col-links">
+        <li><a href="#services">Quantity Surveying</a></li>
+        <li><a href="#services">GIS &amp; Spatial Analysis</a></li>
+        <li><a href="#services">Data Engineering</a></li>
+        <li><a href="#services">BoQ Automation</a></li>
+        <li><a href="#services">AI Applications</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">Contact</p>
+      <p class="footer-col-text">Panadura, Sri Lanka<br>Available remotely worldwide.</p>
+      <p class="footer-col-text" style="margin-top:12px;">dimuthu.fernand@gmail.com</p>
+      <p class="footer-col-text" style="margin-top:6px;">github.com/dimuthuf3rnando-arch</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Dimuthu Fernando. All rights reserved.</p>
+    <ul class="footer-legal">
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  /* ── Scroll progress bar ── */
+  var prog = document.getElementById('scrollProgress');
+  function updateProgress() {
+    var h = document.documentElement;
+    var pct = (h.scrollTop || document.body.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    if (prog) prog.style.width = pct + '%';
+  }
+
+  /* ── Navbar shadow ── */
+  var navbar = document.getElementById('navbar');
+  function updateNavbar() {
+    var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
+    if (navbar) {
+      if (scrollY > 20) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    }
+  }
+
+  /* ── Mobile nav toggle ── */
+  var menuToggle = document.getElementById('menuToggle');
+  var mobileNav  = document.getElementById('mobileNav');
+  if (menuToggle && mobileNav) {
+    menuToggle.addEventListener('click', function() {
+      var isOpen = mobileNav.classList.contains('open');
+      if (!isOpen) {
+        // Make visible first, then trigger opacity transition
+        mobileNav.classList.add('is-visible');
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() {
+            mobileNav.classList.add('open');
+          });
+        });
+        menuToggle.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileNav.classList.remove('open');
+        menuToggle.classList.remove('open');
+        document.body.style.overflow = '';
+        // Hide after transition ends
+        mobileNav.addEventListener('transitionend', function handler() {
+          if (!mobileNav.classList.contains('open')) {
+            mobileNav.classList.remove('is-visible');
+          }
+          mobileNav.removeEventListener('transitionend', handler);
+        });
+      }
+    });
+    document.querySelectorAll('.mobile-nav-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobileNav.classList.remove('open');
+        menuToggle.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(function() { mobileNav.classList.remove('is-visible'); }, 350);
+      });
+    });
+    /* CV button in mobile nav also closes menu */
+    var mobileCv = mobileNav.querySelector('.mobile-nav-cv');
+    if (mobileCv) {
+      mobileCv.addEventListener('click', function() {
+        mobileNav.classList.remove('open');
+        menuToggle.classList.remove('open');
+        document.body.style.overflow = '';
+        setTimeout(function() { mobileNav.classList.remove('is-visible'); }, 350);
+      });
+    }
+  }
+
+  /* ── Hero card entrance + float activation ── */
+  (function() {
+    var isMobile = window.innerWidth <= 900;
+    var cards = document.querySelectorAll('.hero-card');
+
+    if (isMobile) {
+      /* On mobile: use IntersectionObserver scroll-reveal for all cards */
+      var mobileCardObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('mobile-card-revealed');
+            mobileCardObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.10, rootMargin: '0px 0px -20px 0px' });
+      cards.forEach(function(card) {
+        mobileCardObs.observe(card);
+      });
+    } else {
+      /* On desktop: entrance animation then float */
+      cards.forEach(function(card) {
+        card.classList.add('card-entered');
+      });
+      var delays = [0.55, 0.70, 0.85];
+      var entranceDuration = 0.7;
+      cards.forEach(function(card, i) {
+        var totalMs = (delays[i] + entranceDuration) * 1000 + 80;
+        setTimeout(function() {
+          card.classList.remove('card-entered');
+          card.style.opacity = '1';
+          card.classList.add('float-active');
+        }, totalMs);
+      });
+    }
+  })();
+
+  /* ── Generic reveal: .reveal / .reveal-left / .reveal-right / .reveal-scale ── */
+  var revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+  var revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(function(el) { revealObserver.observe(el); });
+
+  /* ── Project card scroll animation ── */
+  var projectCards = document.querySelectorAll('.project-card');
+  var cardObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var card = entry.target;
+        var idx  = Array.from(projectCards).indexOf(card);
+        var delay = (idx % 2) * 120;
+        setTimeout(function() {
+          card.classList.add('card-revealed');
+          var progressFill = card.querySelector('.proj-path-draw');
+          if (progressFill) {
+            progressFill.style.transform = 'scaleX(1)';
+          }
+        }, delay);
+        cardObserver.unobserve(card);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  projectCards.forEach(function(card) { cardObserver.observe(card); });
+
+  /* ── Skill bars ── */
+  var skillBars = document.querySelectorAll('.skill-bar');
+  var skillObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var bar = entry.target;
+        var w   = bar.getAttribute('data-width');
+        setTimeout(function() { bar.style.width = w + '%'; }, 200);
+        skillObserver.unobserve(bar);
+      }
+    });
+  }, { threshold: 0.1 });
+  skillBars.forEach(function(bar) { skillObserver.observe(bar); });
+
+  /* ── Process step lines ── */
+  var processSteps = document.querySelectorAll('.process-step');
+  var processObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        processObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.25 });
+  processSteps.forEach(function(step) { processObs.observe(step); });
+
+  /* ── Parallax scrolling — desktop only for hero-visual ── */
+  var heroVisual = document.querySelector('.hero-visual');
+  var heroSection = document.querySelector('.hero');
+  var ticking = false;
+  var lastScrollY = 0;
+
+  function applyParallax() {
+    /* Only apply hero parallax on desktop */
+    if (heroVisual && heroSection && window.innerWidth > 900) {
+      var rect = heroSection.getBoundingClientRect();
+      var sectionH = heroSection.offsetHeight;
+      if (rect.bottom >= 0 && rect.top <= window.innerHeight) {
+        var progress = -rect.top / (sectionH + window.innerHeight);
+        var offset = progress * sectionH * 0.35;
+        heroVisual.style.transform = 'translateY(' + offset + 'px) translateZ(0)';
+      }
+    } else if (heroVisual && window.innerWidth <= 900) {
+      /* Reset any transform on mobile so cards sit naturally */
+      heroVisual.style.transform = 'none';
+    }
+    ticking = false;
+  }
+
+  function onScroll() {
+    lastScrollY = window.pageYOffset;
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(applyParallax);
+    }
+    updateProgress();
+    updateNavbar();
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ── Smooth anchor scroll (offset for fixed navbar) ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var href = this.getAttribute('href');
+      if (href === '#') return;
+      var target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        var top = target.getBoundingClientRect().top + window.pageYOffset - 80;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  /* ── Initial call ── */
+  updateProgress();
+  updateNavbar();
+</script>
+</body>
+</html>
